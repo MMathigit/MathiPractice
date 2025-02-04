@@ -6,7 +6,7 @@ namespace CustomerLocationApp
     {
         static void Main(string[] args)
         {
-            
+
             List<Customer> customers = new List<Customer>
         {
             new Customer("Mathi", "Chennai"),
@@ -17,33 +17,37 @@ namespace CustomerLocationApp
             new Customer("Cust6", "Madurai")
         };
 
-            Dictionary<string, int> locationCount = GetCustomerCountByLocation(customers);
+            Dictionary<string, List<Customer>> groupedByLocation = GroupCustomersByLocation(customers);
 
-            
-            Console.WriteLine("Number of customers in each location:");
-            foreach (var location in locationCount)
+            Console.WriteLine("Customers grouped by location:");
+            foreach (var group in groupedByLocation)
             {
-                Console.WriteLine($"{location.Key}: {location.Value} customers");
+                Console.WriteLine($"\nLocation: {group.Key}");
+                foreach (var customer in group.Value)
+                {
+                    Console.WriteLine($"{customer.Name}");
+                }
             }
         }
-              
-        static Dictionary<string, int> GetCustomerCountByLocation(List<Customer> customers)
+
+        static Dictionary<string, List<Customer>> GroupCustomersByLocation(List<Customer> customers)
         {
-            Dictionary<string, int> locationCount = new Dictionary<string, int>();
-            
+            Dictionary<string, List<Customer>> locationGroups = new Dictionary<string, List<Customer>>();
+
+           
             foreach (var customer in customers)
             {
-                if (locationCount.ContainsKey(customer.Location))
+                if (locationGroups.ContainsKey(customer.Location))
                 {
-                    locationCount[customer.Location]+=1;
+                    locationGroups[customer.Location].Add(customer);  
                 }
                 else
                 {
-                    locationCount[customer.Location] = 1;
+                    locationGroups[customer.Location] = new List<Customer> { customer };  
                 }
             }
 
-            return locationCount; 
+            return locationGroups;
         }
     }
 }
