@@ -6,7 +6,7 @@ namespace CustomerLocationApp
     {
         static void Main(string[] args)
         {
-            // Create a list of customers
+            
             List<Customer> customers = new List<Customer>
         {
             new Customer("Mathi", "Chennai"),
@@ -17,10 +17,9 @@ namespace CustomerLocationApp
             new Customer("Cust6", "Madurai")
         };
 
-            // Get customer count by location
             Dictionary<string, int> locationCount = GetCustomerCountByLocation(customers);
 
-            // Print the result
+            
             Console.WriteLine("Number of customers in each location:");
             foreach (var location in locationCount)
             {
