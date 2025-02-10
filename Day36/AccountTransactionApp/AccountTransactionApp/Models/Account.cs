@@ -34,6 +34,7 @@ namespace AccountTransactionApp.Models
 
             _balance = _balance + amount;
             _transactions.Add(new Transaction { Amount = amount, Date = DateTime.Now, Type = "Deposit" });
+            
         }
 
         public void Withdraw(double amount)
